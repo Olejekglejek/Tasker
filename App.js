@@ -4,12 +4,12 @@ import Header from './Components/Header';
 import { StatusBar } from 'expo-status-bar';
 
 const App = () => {
-      const [count, setCount] = useState(0);
+ 
 
   return (
 <View style={styles.container}>
   <Header title='Tasker' />  
-      <Button onPress={setCount({ count+ 1})} title='clickMe'/>
+      <Button onPress={} title='clickMe'/>
 </View>
     );
 };
