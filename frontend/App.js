@@ -6,26 +6,18 @@ import uuid from 'uuid-random';
 import Header from './Components/Header';
 import ListItem from './Components/ListItem';
 import AddItem from './Components/AddItem';
+import History from './Components/History'
 import * as Location from 'expo-location';
 
 
 function App() {
-  const [isLoading, setLoading] = useState(true);
-  const [data, setData] = useState([]);
 
-  useEffect(() => {
-    fetch('https://reactnative.dev/movies.json')
-      .then((response) => response.json())
-      .then((json) => setData(json.movies))
-      .catch((error) => console.error(error))
-      .finally(() => setLoading(false));
-  }, []);
-  
+
   const [items, setItems] = useState([
-    { id: uuid(), text: 'Learn Django' },
-    { id: uuid(), text: 'Learn Flutter' },
-    { id: uuid(), text: 'Learn ReacNative' },
-    { id: uuid(), text: 'Learn React' },
+    // { id: uuid(), text: 'Learn Django' },
+    // { id: uuid(), text: 'Learn Flutter' },
+    // { id: uuid(), text: 'Learn ReacNative' },
+    // { id: uuid(), text: 'Learn React' },
   ]);
 
   const deleteItem = (id) => {
@@ -39,7 +31,7 @@ function App() {
       Alert.alert('Error', 'Please enter a task');
 
     } else {
-    
+
     setItems(prevItems => {
       return [{ id: uuid(), text }, ...prevItems];
     });
@@ -48,24 +40,16 @@ function App() {
 
   return (
     <View style={styles.container}>
-      <Header title='Tasker' />
+      <Header title='WoDLogger' />
       <AddItem addItem={addItem} />
-      
+
       <FlatList
         style={styles.list1}
         data={items}
         renderItem={({ item }) => (<ListItem item={item} deleteItem={deleteItem}/>
         )}
       />
-      {isLoading ? <ActivityIndicator/> : (
-        <FlatList style={styles.list} 
-          data={data}
-          keyExtractor={({ id }, index) => id}
-          renderItem={({ item }) => (
-            <Text style={styles.text}>{item.title}, {item.releaseYear}</Text>
-          )}
-        />
-      )}
+<History />
       <Button title='Quote of the Day' onPress={() => {Alert.alert('Just DoIT!!!')}} />
     </View>
   );
@@ -88,12 +72,12 @@ function App() {
       margin: 5,
     },
     list1: {
-     height:'70%', 
+     height:'70%',
     },
     text: {
       color: '#141823',
     }
-  
+
 });
 
 export default App;
